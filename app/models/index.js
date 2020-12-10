@@ -1,6 +1,12 @@
-const dbConfig = require("../config/db.config.js");
+const config = require("../config/db.config.js");
 
 const Sequelize = require("sequelize");
+let dbConfig;
+if(process.env.NODE_ENV === "test"){
+  dbConfig = config.test;
+}else{
+  dbConfig = config.development;
+}
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
@@ -13,6 +19,8 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     idle: dbConfig.pool.idle
   }
 });
+
+
 
 const db = {};
 

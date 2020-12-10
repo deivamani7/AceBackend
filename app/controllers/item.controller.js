@@ -119,16 +119,3 @@ exports.deleteAll = (req, res) => {
         });
 };
 
-// Find all published Items
-exports.findAllPublished = (req, res) => {
-    Item.findAll({ where: { published: true } })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Error occurred while retrieving items."
-      });
-    });
-};
